@@ -19,3 +19,8 @@ If you are using the [audit_artifactory](https://github.com/mattray/audit_artifa
     default['audit_time_window']['profiles']['linux-patch-baseline']['audit_artifactory'] = true
 
 and the profile will be copied into the `audit_artifactory` namespace for processing by that cookbook at run time.
+
+# Limitations
+
+    If the Chef client does not run during the prescribed time window and the audit is not scheduled during that run, the profile may still be skipped.
+    No support for scheduling besides hour and minutes within the day, no cron semantics.

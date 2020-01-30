@@ -1,0 +1,89 @@
+---
+driver:
+  name: vagrant
+
+## The forwarded_port port feature lets you connect to ports on the VM guest via
+## localhost on the host.
+## see also: https://www.vagrantup.com/docs/networking/forwarded_ports.html
+
+#  network:
+#    - ["forwarded_port", {guest: 80, host: 8080}]
+
+provisioner:
+  name: chef_zero
+
+  ## product_name and product_version specifies a specific Chef product and version to install.
+  ## see the Chef documentation for more details: https://docs.chef.io/config_yml_kitchen.html
+  #  product_name: chef
+  #  product_version: 15
+
+verifier:
+  name: inspec
+
+platforms:
+  - name: centos-7
+
+suites:
+  - name: default
+    verifier:
+      inspec_tests:
+        - test/integration/default
+    attributes:
+      audit:
+        reporter: json-file
+        json_file:
+          location: /tmp/default-report.json
+      audit_time_window:
+        profiles:
+          uptime:
+            url: https://github.com/mattray/uptime-profile/
+            start:
+              - '0030'
+              - '0130'
+              - '0230'
+              - '0330'
+              - '0430'
+              - '0530'
+              - '0630'
+              - '0730'
+              - '0830'
+              - '0930'
+              - '1030'
+              - '1130'
+              - '1230'
+              - '1330'
+              - '1430'
+              - '1530'
+              - '1630'
+              - '1730'
+              - '1830'
+              - '1930'
+              - '2030'
+              - '2130'
+              - '2230'
+              - '2330'
+            end:
+              - '0050'
+              - '0150'
+              - '0250'
+              - '0350'
+              - '0450'
+              - '0550'
+              - '0650'
+              - '0750'
+              - '0850'
+              - '0950'
+              - '1050'
+              - '1150'
+              - '1250'
+              - '1350'
+              - '1450'
+              - '1550'
+              - '1650'
+              - '1750'
+              - '1850'
+              - '1950'
+              - '2050'
+              - '2150'
+              - '2250'
+              - '2350'
